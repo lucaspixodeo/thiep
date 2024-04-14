@@ -41,10 +41,10 @@
 <body>
 
 <input type="text" placeholder="Tên ngoài bìa" oninput="inputChange(event)" required>
+<button onclick="saveDivAsImage()">Lưu Bìa</button>
 <br>
 <input type="text" placeholder="Tên trong thiệp" oninput="inputChange1(event)" required>
-<br>
-<button onclick="saveDivAsImage()">Lưu Thiệp Mời</button>
+<button onclick="saveDivAsImage1()">Lưu Thiệp Mời</button>
 <div id="invitation">
     <img src="bia.jpg">
     <span id="name"></span>
@@ -70,6 +70,8 @@
                 link.click();
             }
         });
+    }
+    function saveDivAsImage1() {
         html2canvas(document.getElementById('invitation1'), {
             onrendered: function(canvas) {
                 var link = document.createElement('a');
