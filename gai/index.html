@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Thiệp Mời</title>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+<style>
+    #invitation {
+        position: relative;
+        width: 1156px;
+    }
+    #invitation1 {
+        position: relative;
+        width: 2048px;
+    }
+    #name {
+        color: #AB1D3B;
+        font-size: 80px;
+        position: absolute;
+        top: 625px;
+        left: 450px;
+        font-family: Allura;
+    }
+    #name1 {
+        color: #AB1D3B;
+        font-size: 40px;
+        position: absolute;
+        top: 290px;
+        left: 1240px;
+        font-family: Allura;
+        font-weight: 600;
+    }
+    input, button {
+        padding: 5px 10px;
+        margin: 5px;
+    }
+</style>
+<body>
+
+<input type="text" placeholder="Tên ngoài bìa" oninput="inputChange(event)" required>
+<br>
+<input type="text" placeholder="Tên trong thiệp" oninput="inputChange1(event)" required>
+<br>
+<button onclick="saveDivAsImage()">Lưu Thiệp Mời</button>
+<div id="invitation">
+    <img src="bia.jpg">
+    <span id="name"></span>
+</div>
+<div id="invitation1">
+    <img src="ruot.jpg">
+    <span id="name1"></span>
+</div>
+
+<script>
+    function inputChange(event) {
+        document.getElementById('name').innerText = event.target.value;
+    }
+    function inputChange1(event) {
+        document.getElementById('name1').innerText = event.target.value;
+    }
+    function saveDivAsImage() {
+        html2canvas(document.getElementById('invitation'), {
+            onrendered: function(canvas) {
+                var link = document.createElement('a');
+                link.download = textToSlug(document.getElementById('name').innerText) + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+        });
+        html2canvas(document.getElementById('invitation1'), {
+            onrendered: function(canvas) {
+                var link = document.createElement('a');
+                link.download = textToSlug(document.getElementById('name1').innerText) + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+        });
+    }
+    function textToSlug(text) {
+        return text.toLowerCase()
+            .replace(/[^\w\s]/g, '')
+            .replace(/\s+/g, '_')
+            .replace(/_+/g, '_');
+    }
+</script>
+
+</body>
+</html>
